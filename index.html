@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinakiiiii</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #ff0000;
+            overflow: hidden;
+        }
+
+        .image-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('valentin.jpg');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding-top: 10%;
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #ff1493;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-top: 15%;
+            animation: rainbow 3s infinite;
+        }
+
+        p {
+            color: #ffd700;
+            font-size: 1.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: bounce 1.5s infinite;
+            position: fixed;
+            bottom: 90px;
+            left: 43.5%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            z-index: 4;
+            margin: 0;
+        }
+
+        audio {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            padding: 10px;
+            width: 300px;
+            margin: 0;
+            transition: transform 0.3s ease;
+        }
+
+        audio:hover {
+            transform: translateX(-50%) scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff69b4;
+            font-size: 60px;
+            animation: float 6s linear infinite;
+            opacity: 0;
+            filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.5));
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(calc(var(--random) * 100px));
+                opacity: 0;
+            }
+        }
+
+        @keyframes rainbow {
+            0% { color: #ff1493; }
+            25% { color: #ff69b4; }
+            50% { color: #ff4500; }
+            75% { color: #ffd700; }
+            100% { color: #ff1493; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="image-container"></div>
+    <div class="content">
+        <h1>Ena site gia thn gunaika mou</h1>
+        <p>Pata gia na apolaeuseis</p>
+        <audio controls loop>
+            <source src="song.mp3" type="audio/mpeg">
+            <source src="song.ogg" type="audio/ogg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <script>
+        function createHeart() {
+            const heartsContainer = document.getElementById('hearts');
+            const heart = document.createElement('div');
+            
+            heart.className = 'heart';
+            heart.innerHTML = '❤';
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.setProperty('--random', Math.random() * 2 - 1);
+            heart.style.animationDuration = `${Math.random() * 3 + 3}s`;
+            heart.style.fontSize = `${Math.random() * 30 + 40}px`;
+            
+            heartsContainer.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 150);
+    </script>
+</body>
+</html>
